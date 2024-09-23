@@ -81,7 +81,7 @@ function App() {
     0
   );
   useEffect(function (params) {
-    fetch("http://localhost:9000/questions")
+    fetch("https://my-json-server.typicode.com/hksharmaji/Quiz-App/questions")
       .then((res) => res.json())
       .then((data) => dispatch({ type: "received", payload: data }))
       .catch((err) => dispatch({ type: "datafailed" }));
