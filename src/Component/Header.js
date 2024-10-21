@@ -1,9 +1,10 @@
 import React from "react";
+import logo from "../assets/logo192.png";
 function Header() {
   return (
     <header className="app-header">
-      <img src="../logo512.png" alt="react-logo" />
-      <h1>The React Quiz</h1>
+      <img src={logo} alt="react-logo" />
+      <h1 className="p-4">The React Quiz</h1>
     </header>
   );
 }

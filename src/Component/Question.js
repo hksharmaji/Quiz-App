@@ -2,7 +2,6 @@ import React from "react";
 import Options from "./Options";
 
 function Question({ question, dispatch, answer, points }) {
-  console.log(question);
   return (
     <div>
       <h2>{question.question}</h2>

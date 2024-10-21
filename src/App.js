@@ -22,7 +22,6 @@ const initialState = {
   secondRemaining: null,
 };
 function reducer(state, action) {
-  console.log(state, action);
   switch (action.type) {
     case "received":
       return { ...state, questions: action.payload, status: "ready" };
