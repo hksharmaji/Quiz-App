@@ -24,6 +24,7 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case "received":
+      console.log(action.payload);
       return { ...state, questions: action.payload, status: "ready" };
     case "datafailed":
       return { ...state, status: "error" };
@@ -31,7 +32,7 @@ function reducer(state, action) {
       return {
         ...state,
         status: "active",
-        secondRemaining: state.questions.length * SEC_PER_SEC,
+        secondRemaining: state.questions?.length * SEC_PER_SEC,
       };
     case "newAnswer":
       const question = state.questions.at(state.index);
@@ -75,14 +76,15 @@ function App() {
     dispatch,
   ] = useReducer(reducer, initialState);
   const numQuestions = questions.length;
-  const maxPossiblePoints = questions.reduce(
-    (prev, cur) => prev + cur.points,
-    0
-  );
-  useEffect(function (params) {
-    fetch("https://my-json-server.typicode.com/hksharmaji/Quiz-App/questions")
+  console.log("myqueston", numQuestions);
+  // const maxPossiblePoints = questions.reduce(
+  //   (prev, cur) => prev + cur.points,
+  //   0
+  // );
+  useEffect(() => {
+    fetch("https://hksharmaji.github.io/api/api.json")
       .then((res) => res.json())
-      .then((data) => dispatch({ type: "received", payload: data }))
+      .then((data) => dispatch({ type: "received", payload: data.questions }))
       .catch((err) => dispatch({ type: "datafailed" }));
   }, []);
 
@@ -101,7 +103,7 @@ function App() {
               index={index}
               numQuestions={numQuestions}
               points={points}
-              maxPossiblePoints={maxPossiblePoints}
+              maxPossiblePoints={800}
               answer={answer}
             />
             <Question
@@ -125,7 +127,7 @@ function App() {
           <FinishScreen
             points={points}
             highScore={highScore}
-            maxPossiblePoints={maxPossiblePoints}
+            maxPossiblePoints={800}
             dispatch={dispatch}
           />
         )}
